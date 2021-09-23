@@ -55,6 +55,28 @@ func (cc CharacterCollection) ToString() string {
 	return "[" + string(cc) + "]"
 }
 
+func MakeCharacterCollection(values ...interface{}) (cc CharacterCollection) {
+	for _, v := range values {
+		switch v.(type) {
+		case rune, byte:
+			cc += makeChar(v.(rune))
+		case string:
+			cc += makeCharacterCollectionFromString(v.(string))
+		case CharacterCollection:
+			cc += v.(CharacterCollection)
+		}
+	}
+	return
+}
+
+func makeCharacterCollectionFromString(s string) (cc CharacterCollection) {
+	for _, r := range s {
+		c := makeChar(r)
+		cc += c
+	}
+	return
+}
+
 // builtIn character collections
 const (
 	Any CharacterCollection = `.`

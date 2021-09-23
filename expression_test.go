@@ -31,3 +31,8 @@ func TestMakeRange(t *testing.T) {
 		}
 	}
 }
+
+func TestMakeCC(t *testing.T) {
+	cc := repat.MakeCharacterCollection(`!@#$%^-&`, repat.MakeCharRange('a', 'f'))
+	t.Log(cc.ToString())
+}
